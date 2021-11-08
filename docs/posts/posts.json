@@ -1,0 +1,36 @@
+[
+  {
+    "path": "posts/2021-11-07-projects/",
+    "title": "projects",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Amir Babar",
+        "url": "https://amirbabar.github.io"
+      }
+    ],
+    "date": "2021-11-07",
+    "categories": [],
+    "contents": "\r\nLook at my cool projects!\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-11-07T23:58:04-05:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to My Blog",
+    "description": "Welcome to our new blog, My Blog. We hope you enjoy \nreading what we have to say!",
+    "author": [
+      {
+        "name": "Amir Babar",
+        "url": "https://amirbabar.github.io"
+      }
+    ],
+    "date": "2021-11-07",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-11-07T23:57:29-05:00",
+    "input_file": {}
+  }
+]

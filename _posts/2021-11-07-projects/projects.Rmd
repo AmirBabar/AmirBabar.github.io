@@ -1,0 +1,20 @@
+---
+title: "projects"
+description: |
+  A short description of the post.
+author:
+  - name: Amir Babar
+    url: https://amirbabar.github.io
+date: 2021-11-07
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Look at my cool projects!
+
