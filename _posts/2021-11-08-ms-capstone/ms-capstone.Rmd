@@ -1,7 +1,7 @@
 ---
 title: "MS Capstone"
 description: |
-  A short description of the post.
+  Capstone project for MS Business Analytics
 author:
   - name: Amir Babar
     url: https://amirbabar.github.io
