@@ -167,8 +167,12 @@ h1, h2, h3 {
 }
 
 .reveal {
-  opacity: 0;
+  opacity: 1;
   animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.js-ready .reveal {
+  opacity: 0;
 }
 
 .reveal-delay-1 { animation-delay: 0.1s; }
@@ -517,7 +521,7 @@ h1, h2, h3 {
 
 .timeline-org {
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-hover);
   font-size: 0.9rem;
   margin-bottom: 0.2rem;
   letter-spacing: 0.01em;
@@ -605,7 +609,7 @@ h1, h2, h3 {
 
 .edu-school {
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-hover);
   font-size: 0.88rem;
   margin-bottom: 0.15rem;
 }
@@ -727,6 +731,13 @@ h1, h2, h3 {
   background: var(--border-light);
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.pub-id:hover {
+  color: var(--accent-hover);
+  background: var(--accent-light);
 }
 
 /* --- Honors --- */
@@ -990,4 +1001,14 @@ h1, h2, h3 {
 /* Smooth scroll offset for anchor links */
 [id] {
   scroll-margin-top: 72px;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1 !important; }
 }
