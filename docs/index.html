@@ -33,6 +33,7 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
+    <div class="hero-noise"></div>
     <div class="hero-inner">
       <div class="hero-text">
         <h1>Amir Babar</h1>
@@ -60,8 +61,8 @@
     <div class="container">
       <h2 class="section-title">About</h2>
       <div class="about-content">
-        <p>Data analytics and business intelligence professional with deep expertise in healthcare operations and Epic Systems. Holds an MS in Computer Science (HCI specialization) from Georgia Tech, combining software engineering training with domain expertise in healthcare analytics, operations research, and predictive modeling.</p>
-        <p>Proven track record solving complex operational challenges, modernizing data infrastructure, and delivering measurable business impact&mdash;including over $2M in identified cost savings. Career spans molecular genetics research, supply chain analytics, and healthcare decision support at one of the nation&rsquo;s leading academic health systems.</p>
+        <p class="reveal reveal-delay-1">Data analytics and business intelligence professional with deep expertise in healthcare operations and Epic Systems. Holds an MS in Computer Science (HCI specialization) from Georgia Tech, combining software engineering training with domain expertise in healthcare analytics, operations research, and predictive modeling.</p>
+        <p class="reveal reveal-delay-2">Proven track record solving complex operational challenges, modernizing data infrastructure, and delivering measurable business impact&mdash;including over $2M in identified cost savings. Career spans molecular genetics research, supply chain analytics, and healthcare decision support at one of the nation&rsquo;s leading academic health systems.</p>
       </div>
     </div>
   </section>
@@ -74,7 +75,7 @@
 
         <article class="timeline-item">
           <div class="timeline-marker"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal">
             <div class="timeline-header">
               <h3>Senior Consultant, Strategic Decision Support</h3>
               <p class="timeline-org">Penn Medicine, University of Pennsylvania Health System</p>
@@ -92,7 +93,7 @@
 
         <article class="timeline-item">
           <div class="timeline-marker"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal reveal-delay-2">
             <div class="timeline-header">
               <h3>Business Intelligence Analyst</h3>
               <p class="timeline-org">Penn Medicine Lancaster General Health</p>
@@ -109,7 +110,7 @@
 
         <article class="timeline-item">
           <div class="timeline-marker"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal reveal-delay-4">
             <div class="timeline-header">
               <h3>Senior Strategic Sourcing Analyst</h3>
               <p class="timeline-org">Tower Health</p>
@@ -133,21 +134,21 @@
       <h2 class="section-title">Education</h2>
       <div class="education-grid">
 
-        <div class="education-card">
+        <div class="education-card reveal">
           <h3>MS Computer Science</h3>
           <p class="edu-school">Georgia Institute of Technology</p>
           <p class="edu-detail">HCI Specialization &middot; 2021&ndash;2025</p>
           <p class="edu-focus">Digital Health Equity, Human-Computer Interaction, Simulation, Database Systems, Network Science, Machine Learning, Health Informatics</p>
         </div>
 
-        <div class="education-card">
+        <div class="education-card reveal reveal-delay-2">
           <h3>MS Business Analytics</h3>
           <p class="edu-school">University of Cincinnati, Lindner College of Business</p>
           <p class="edu-detail">2017&ndash;2019</p>
           <p class="edu-focus">Predictive Modeling, Data Mining, Optimization, Simulation, Healthcare Data Analytics, Supply Chain Strategy</p>
         </div>
 
-        <div class="education-card">
+        <div class="education-card reveal reveal-delay-4">
           <h3>MS Molecular Genetics, Biochemistry &amp; Microbiology</h3>
           <p class="edu-school">University of Cincinnati College of Medicine</p>
           <p class="edu-detail">2014&ndash;2017</p>
@@ -274,6 +275,39 @@
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
+    });
+
+    // Scroll-triggered reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      // Only pause elements below the fold (hero elements animate on load)
+      const rect = el.getBoundingClientRect();
+      if (rect.top > window.innerHeight) {
+        el.style.animationPlayState = 'paused';
+        revealObserver.observe(el);
+      }
+    });
+
+    // Section title underline draw
+    const titleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          titleObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.section-title').forEach(el => {
+      titleObserver.observe(el);
     });
   </script>
 
