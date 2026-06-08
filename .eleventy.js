@@ -1,8 +1,6 @@
 module.exports = function(eleventyConfig) {
   // Passthrough copy for blog assets (images etc.)
-  eleventyConfig.addPassthroughCopy({
-    "blog/assets": "blog/assets",
-  });
+  eleventyConfig.addPassthroughCopy({ "blog": "blog" });
 
   // Custom markdown library for wikilink support
   const markdownIt = require("markdown-it");

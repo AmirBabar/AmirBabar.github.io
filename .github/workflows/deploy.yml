@@ -27,6 +27,8 @@ jobs:
 
       - run: npm ci
 
+      # Build blog into docs/blog/ — preserves existing docs/ files
+      # (index.html, style.css, blog.css, assets/)
       - run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
