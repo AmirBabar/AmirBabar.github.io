@@ -8,4 +8,4 @@ node_modules/
 content/.obsidian/
 
 # Eleventy build output — deployed via Actions artifact, not committed
-docs/blog/
+docs/posts/

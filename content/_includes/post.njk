@@ -1,5 +1,5 @@
 ---
-permalink: /blog/{{ title | slugify }}/
+permalink: /posts/{{ title | slugify }}/
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -8,13 +8,13 @@ permalink: /blog/{{ title | slugify }}/
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ description }}">
   <meta name="author" content="Amir Babar">
-  <link rel="canonical" href="https://amirbabar.github.io/blog/{{ title | slugify }}/">
+  <link rel="canonical" href="https://amirbabar.github.io/posts/{{ title | slugify }}/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="{{ title }} — Amir Babar">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:url" content="https://amirbabar.github.io/blog/{{ title | slugify }}/">
+  <meta property="og:url" content="https://amirbabar.github.io/posts/{{ title | slugify }}/">
   <meta property="og:image" content="https://amirbabar.github.io/assets/headshot.jpg">
   <meta property="article:published_time" content="{{ date | dateToISO }}">
   {% if tags %}
@@ -46,14 +46,14 @@ permalink: /blog/{{ title | slugify }}/
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://amirbabar.github.io/blog/{{ title | slugify }}/"
+      "@id": "https://amirbabar.github.io/posts/{{ title | slugify }}/"
     }
   }
   </script>
 
   <title>{{ title }} — Amir Babar</title>
   <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="blog.css">
+  <link rel="stylesheet" href="posts.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@ permalink: /blog/{{ title | slugify }}/
         <li><a href="../#education">Education</a></li>
         <li><a href="../#skills">Skills</a></li>
         <li><a href="../#publications">Publications</a></li>
-        <li><a href="../blog/" aria-current="page">Blog</a></li>
+        <li><a href="../posts/" aria-current="page">Blog</a></li>
         <li><a href="../#contact">Contact</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@ permalink: /blog/{{ title | slugify }}/
     <article class="blog-post">
       <header class="blog-header">
         <div class="container">
-          <a href="../blog/" class="blog-back">&larr; All Posts</a>
+          <a href="../posts/" class="blog-back">&larr; All Posts</a>
           <h1 class="blog-title">{{ title }}</h1>
           <div class="blog-meta">
             <time datetime="{{ date | dateToISO }}">{{ date | dateDisplay }}</time>

@@ -1,6 +1,6 @@
 module.exports = function(eleventyConfig) {
   // Passthrough copy for blog assets (images etc.)
-  eleventyConfig.addPassthroughCopy({ "blog": "blog" });
+  eleventyConfig.addPassthroughCopy({ "blog": "posts" });
 
   // Custom markdown library for wikilink support
   const markdownIt = require("markdown-it");
@@ -21,7 +21,7 @@ module.exports = function(eleventyConfig) {
 
       if (!silent) {
         const token = state.push("wikilink_open", "a", 1);
-        token.attrSet("href", `/blog/${state.src.slice(state.pos + 2, end).toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}/`);
+        token.attrSet("href", `/posts/${state.src.slice(state.pos + 2, end).toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}/`);
 
         const text = state.push("text", "", 0);
         text.content = state.src.slice(state.pos + 2, end);
