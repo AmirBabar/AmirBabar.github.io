@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# Eleventy / Node
+node_modules/
+content/.obsidian/
