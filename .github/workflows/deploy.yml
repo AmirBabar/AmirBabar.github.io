@@ -32,11 +32,11 @@ jobs:
 
       - name: Install Quartz plugins
         working-directory: source
-        run: npx quartz plugin install
+        run: node quartz/bootstrap-cli.mjs plugin install
 
       - name: Build Quartz site
         working-directory: source
-        run: npx quartz build -o public && mv public/index public/index.html
+        run: node quartz/bootstrap-cli.mjs build -o public && mv public/index public/index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:

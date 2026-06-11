@@ -12,3 +12,6 @@ source/.quartz/
 
 # Source material (local only)
 info/
+
+# Obsidian vault config
+.obsidian/

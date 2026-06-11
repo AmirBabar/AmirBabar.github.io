@@ -1,9 +1,13 @@
 ---
-title: "Building a Blog with Eleventy and Obsidian"
+title: Building a Blog with Eleventy and Obsidian
 date: 2025-06-08
-description: "How I set up a lightweight, Obsidian-friendly blog pipeline using Eleventy to generate static pages from Markdown."
-tags: ["web development", "eleventy", "obsidian", "posts"]
-draft: false
+description: How I set up a lightweight, Obsidian-friendly blog pipeline using Eleventy to generate static pages from Markdown.
+tags:
+  - web development
+  - eleventy
+  - obsidian
+  - posts
+draft: true
 ---
 
 I wanted a blog that I could write in Obsidian — my preferred note-taking tool — and publish as static HTML to GitHub Pages. The requirements were straightforward:
