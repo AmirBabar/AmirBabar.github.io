@@ -24,16 +24,19 @@ jobs:
         with:
           node-version: "22"
           cache: npm
+          cache-dependency-path: source/package-lock.json
 
-      - run: npm ci
+      - name: Install Quartz dependencies
+        working-directory: source
+        run: npm ci
 
-      # Build blog into docs/blog/ — preserves existing docs/ files
-      # (index.html, style.css, blog.css, assets/)
-      - run: npm run build
+      - name: Build Quartz site
+        working-directory: source
+        run: npx quartz build -o public && mv public/index public/index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: source/public
 
   deploy:
     needs: build

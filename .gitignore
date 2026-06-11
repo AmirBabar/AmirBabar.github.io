@@ -3,9 +3,12 @@
 .RData
 .Ruserdata
 
-# Eleventy / Node
+# Node
 node_modules/
-content/.obsidian/
 
-# Eleventy build output — deployed via Actions artifact, not committed
-docs/posts/
+# Quartz build output — deployed via Actions artifact, not committed
+source/public/
+source/.quartz/
+
+# Source material (local only)
+info/

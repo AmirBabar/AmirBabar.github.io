@@ -2,12 +2,9 @@
   "name": "amirbabar-github-io",
   "version": "1.0.0",
   "private": true,
-  "description": "Personal website and blog for Amir Babar",
+  "description": "Personal website and blog for Amir Babar — Quartz static site",
   "scripts": {
-    "build": "eleventy",
-    "serve": "eleventy --serve"
-  },
-  "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "build": "cd source && npx quartz build -o public && mv public/index public/index.html",
+    "serve": "cd source && npx quartz build -o public --serve"
   }
 }

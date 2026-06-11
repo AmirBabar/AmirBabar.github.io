@@ -1,0 +1,196 @@
+@use "./variables.scss" as *;
+
+// ============================================================
+// Custom theme overrides — Amir Babar portfolio cohesion
+// ============================================================
+
+// --- Typography refinements ---
+// Config sets DM Serif Display (header) and DM Sans (body) via Google Fonts.
+// This refines heading hierarchy to ensure DM Serif is used consistently.
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--headerFont);
+  color: var(--dark);
+  letter-spacing: -0.01em;
+}
+
+body, p, li, td, th {
+  font-family: var(--bodyFont);
+}
+
+// --- Blog post content area ---
+// Match the landing page About section: 68ch max-width, generous line-height
+
+#quartz-body > article {
+  max-width: 68ch;
+  line-height: 1.85;
+  font-size: 1.05rem;
+
+  p {
+    margin-bottom: 1.4em;
+  }
+
+  h2 {
+    margin-top: 2.5em;
+    margin-bottom: 0.8em;
+    font-size: 1.65rem;
+  }
+
+  h3 {
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+    font-size: 1.3rem;
+  }
+}
+
+// --- Link styling ---
+// Blue links with hover transition, matching landing page behavior
+
+a {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.25s ease;
+
+  &:hover {
+    color: var(--tertiary);
+  }
+
+  // Internal wikilinks get subtle highlight background (Quartz default)
+  &.internal {
+    background-color: var(--highlight);
+    padding: 0 0.15rem;
+    border-radius: 4px;
+    transition: background-color 0.25s ease, color 0.25s ease;
+
+    &:hover {
+      background-color: var(--secondary);
+      color: var(--light);
+    }
+  }
+}
+
+// --- Card and list styling ---
+// Soften Quartz's default cards to match portfolio's border/card aesthetic
+
+.page-title,
+.sr-only {
+  // no change needed
+}
+
+// Explorer / sidebar tree
+.explorer {
+  // Subtle left border for active items
+  a {
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &.active {
+      border-left-color: var(--secondary);
+      color: var(--secondary);
+    }
+  }
+}
+
+// Graph view — match accent color
+.graph-view {
+  .node {
+    &.active {
+      stroke: var(--secondary) !important;
+    }
+  }
+}
+
+// --- Sidebar ---
+// Light tinted sidebar background to echo the hero section feel
+
+@media all and ($tablet) {
+  #quartz-sidebar-left {
+    border-right: 1px solid var(--lightgray);
+  }
+
+  #quartz-sidebar-right {
+    border-left: 1px solid var(--lightgray);
+  }
+}
+
+// --- Breadcrumbs ---
+.breadcrumb {
+  font-size: 0.85rem;
+  color: var(--gray);
+  a {
+    color: var(--secondary);
+    font-weight: 500;
+  }
+}
+
+// --- Tag pills ---
+.tag-link {
+  &::before {
+    content: "#";
+    opacity: 0.6;
+  }
+}
+
+// --- Backlinks section ---
+.backlinks {
+  border-top: 1px solid var(--lightgray);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+
+  h3 {
+    font-size: 1.1rem;
+    color: var(--dark);
+  }
+}
+
+// --- Search ---
+// Ensure search dropdown feels cohesive
+
+.search-container {
+  input {
+    font-family: var(--bodyFont);
+    border: 1px solid var(--lightgray);
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: var(--secondary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+  }
+}
+
+// --- Table of contents ---
+.toc {
+  border-left: 2px solid var(--lightgray);
+  padding-left: 0.75rem;
+
+  a {
+    &.active {
+      color: var(--secondary);
+      font-weight: 600;
+      border-left-color: var(--secondary);
+    }
+  }
+}
+
+// --- Footer ---
+footer {
+  border-top: 1px solid var(--lightgray);
+}
+
+// --- Print styles ---
+@media print {
+  #quartz-sidebar-left,
+  #quartz-sidebar-right,
+  #quartz-header {
+    display: none !important;
+  }
+
+  #quartz-body > article {
+    max-width: 100%;
+    font-size: 12pt;
+  }
+}
