@@ -2,7 +2,7 @@
 configuration:
   pageTitle: Amir Babar
   pageTitleSuffix: ""
-  enableSPA: true
+  enableSPA: false
   enablePopovers: true
   locale: en-US
   baseUrl: amirbabar.github.io
