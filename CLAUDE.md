@@ -10,11 +10,11 @@ The site is designed to serve as a recruiter-friendly, narrative-driven home bas
 
 ## Project Overview
 
-Professional portfolio hub and blog for Amir Babar, hosted on GitHub Pages at `https://amirbabar.github.io/`. The site consists of a static landing page (portfolio) and a Quartz-powered blog with wikilinks, search, graph view, and Obsidian vault integration.
+Professional portfolio hub and blog for Amir Babar, hosted on GitHub Pages at `https://amirbabar.github.io/`. The site consists of a static landing page (portfolio) and a Quartz v5-powered blog with wikilinks, search, graph view, and Obsidian vault integration.
 
-**Stack:** Quartz v5 builds the blog from `source/content/`. The landing page (HTML/CSS/JS) lives in `source/content/` as static assets copied verbatim to the build output root. Blog served at `/posts/`.
+**Stack:** Quartz v5 (YAML config, community plugins) builds everything from `source/content/`. The landing page (HTML/CSS/JS) and blog posts (Markdown) all live in `source/content/`. Quartz's Assets emitter copies non-markdown files to the build root verbatim; the Markdown processor generates blog HTML.
 
-**Site structure:** Landing page at `/` (single-page with anchor navigation). Blog at `/posts/` (Quartz SPA with sidebar, search, backlinks, TOC, graph view).
+**Site structure:** Landing page at `/` (single-page with anchor navigation). Blog at `/posts/` (multi-page with sidebar, search, backlinks, TOC, graph view). SPA mode is disabled due to the raw HTML landing page coexisting with Quartz-rendered pages.
 
 ## Key Files
 
@@ -26,9 +26,9 @@ Professional portfolio hub and blog for Amir Babar, hosted on GitHub Pages at `h
 | `source/content/posts/*.md` | Blog posts (Markdown + YAML frontmatter) |
 | `source/quartz.config.yaml` | Quartz site config (title, fonts, colors, plugins, layout) |
 | `source/quartz/styles/custom.scss` | Theme overrides matching portfolio design |
-| `source/public/` | Build output (generated, not committed) |
-| `.github/workflows/deploy.yml` | CI/CD: Quartz build + deploy on push |
-| `info/` | Source material (CV, LinkedIn data, photos, diplomas) — do not edit directly |
+| `source/public/` | Build output (generated, gitignored) |
+| `.github/workflows/deploy.yml` | CI/CD: plugin install + Quartz build + deploy on push |
+| `info/` | Source material (CV, LinkedIn data, photos, diplomas) — local only, gitignored |
 
 ## Design System
 
@@ -67,7 +67,7 @@ Professional portfolio hub and blog for Amir Babar, hosted on GitHub Pages at `h
 ## Blog Architecture
 
 **Stack:** Quartz v5 builds Markdown from `source/content/posts/` to static HTML in `source/public/`. Blog served at `/posts/`.
-**Obsidian vault:** `source/content/` — open this folder in Obsidian for writing.
+**Obsidian vault:** `source/content/` — open this folder in Obsidian for writing. The `.obsidian/` config directory is gitignored.
 
 | Path | Purpose |
 |------|---------|
@@ -77,7 +77,7 @@ Professional portfolio hub and blog for Amir Babar, hosted on GitHub Pages at `h
 | `source/content/assets/` | Landing page images |
 | `source/quartz.config.yaml` | Site configuration (plugins, theme, layout) |
 | `source/quartz/styles/custom.scss` | Custom SCSS theme overrides |
-| `source/public/` | Generated build output |
+| `source/public/` | Generated build output (gitignored) |
 
 ### Blog Frontmatter Schema
 ```yaml
@@ -85,23 +85,32 @@ Professional portfolio hub and blog for Amir Babar, hosted on GitHub Pages at `h
 title: "Post Title"
 date: YYYY-MM-DD
 description: "One-sentence summary for SEO."
-tags: ["tag1", "tag2"]
+tags:
+  - tag1
+  - tag2
 draft: true
 ---
 ```
-Set `draft: false` to publish. Quartz handles layout via config — no `layout` field needed.
+Set `draft: false` to publish. No `layout` field needed — Quartz handles layout via config.
 
 ### Build Commands
+- `npm run setup` — first-time onboarding: `npm ci` + plugin install (matches CI steps 1–2)
 - `npm run build` — builds Quartz site to `source/public/`, renames `index` to `index.html`
 - `npm run serve` — builds and starts dev server for live preview
 
 ### Landing Page Copy
-The landing page files (`index.html`, `style.css`, `assets/headshot.jpg`) live in `source/content/` and are copied verbatim to the build root by Quartz's Assets emitter. The build script renames the slug-stripped `index` file back to `index.html` for GitHub Pages compatibility.
+The landing page files (`index.html`, `style.css`, `assets/headshot.jpg`) live in `source/content/` alongside blog posts. Quartz's Assets emitter copies all non-markdown files to the build root. The build script renames the slug-stripped `index` file back to `index.html` for GitHub Pages compatibility. SPA mode is disabled (`enableSPA: false`) because client-side routing breaks the raw landing page.
+
+### CI/CD Notes
+- GitHub Actions runs `npm ci`, then `node quartz/bootstrap-cli.mjs plugin install`, then `node quartz/bootstrap-cli.mjs build -o public`
+- Uses `node quartz/bootstrap-cli.mjs` directly instead of `npx quartz` to avoid bin resolution issues on runners
+- Post-build step: `mv public/index public/index.html`
+- Plugins are installed from the lockfile on each build (`.quartz/` is gitignored)
 
 ## Workflow
 
 - **Landing page edits** go to `source/content/index.html` and `source/content/style.css`.
-- **Blog posts** are written in `source/content/posts/` as Markdown, then `npm run build`.
+- **Blog posts** are written in `source/content/posts/` as Markdown (via Obsidian or any editor), then `npm run build`.
 - **Theme changes** go in `source/quartz.config.yaml` (colors, fonts) or `source/quartz/styles/custom.scss` (CSS overrides).
 - Commit to `main`, push — GitHub Actions builds and deploys.
 - Always verify internal consistency when updating content (e.g., if About mentions "standardization and consolidation," the Experience bullet must match).

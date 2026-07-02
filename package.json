@@ -4,7 +4,8 @@
   "private": true,
   "description": "Personal website and blog for Amir Babar — Quartz static site",
   "scripts": {
-    "build": "cd source && npx quartz build -o public && mv public/index public/index.html",
-    "serve": "cd source && npx quartz build -o public --serve"
+    "setup": "cd source && npm ci && node quartz/bootstrap-cli.mjs plugin install",
+    "build": "cd source && node quartz/bootstrap-cli.mjs build -o public && mv public/index public/index.html",
+    "serve": "cd source && node quartz/bootstrap-cli.mjs build -o public --serve"
   }
 }
